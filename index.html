@@ -1,116 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aditya Yadav | Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      line-height: 1.7;
-      color: #1f2937;
-      background: #f8fafc;
-    }
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 32px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-    }
-    h1 {
-      margin-bottom: 6px;
-      font-size: 2.4rem;
-    }
-    .subtitle {
-      color: #6b7280;
-      margin-top: 0;
-      font-size: 1.05rem;
-    }
-    h2 {
-      margin-top: 32px;
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 6px;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    .tag {
-      display: inline-block;
-      background: #eef2ff;
-      color: #3730a3;
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin: 6px 6px 0 0;
-      font-size: 0.95rem;
-    }
-    .small {
-      color: #6b7280;
-      font-size: 0.95rem;
-    }
-    a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aditya Yadav | Sales, Marketing &amp; Digital Presence</title>
+<meta name="description" content="Aditya Yadav, BBA student from Gwalior with FMCG field sales experience at Prataap Snacks (Yellow Diamond) and hands-on digital marketing work.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%92%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FFF1A6;--sheet:#FFFDF3;--ink:#1B2A6B;--blue:#2447D6;--pink:#FF8FA3;--red:#D92D20;--text:#1c2233;--muted:#4a5070;--sun:#FFE45E}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:1.0625rem;line-height:1.6;color:var(--text);background:var(--paper) repeating-linear-gradient(to bottom,transparent 0 35px,rgba(36,71,214,.13) 35px 36px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.top{display:flex;flex-wrap:wrap;gap:8px 24px;padding:22px 0;font-weight:600}
+.top a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent}
+.top a:hover{border-color:var(--pink)}
+.top .me{margin-right:auto;font-weight:800}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:36px 0 84px}
+h1{font-size:clamp(3.4rem,11vw,7.6rem);line-height:.9;margin:0 0 28px;font-weight:800;letter-spacing:-.045em;color:var(--ink)}
+.lead{font-size:1.25rem;max-width:34em;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-block;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;padding:12px 20px;border:2px solid var(--ink);border-radius:6px;background:var(--sun);color:var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.alt{background:var(--sheet)}
+
+/* order slip: the one memorable element */
+.slip{position:relative;background:var(--sheet);border:2px solid var(--ink);border-radius:6px;box-shadow:9px 9px 0 var(--pink);transform:rotate(2deg)}
+.slip-top{display:flex;justify-content:space-between;gap:12px;padding:10px 18px;background:var(--pink);border-bottom:2px solid var(--ink);font-weight:800;color:var(--ink)}
+.slip-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 18px;border-bottom:2px solid var(--ink);color:var(--muted);font-size:.95rem}
+.slip-meta b{color:var(--ink)}
+.slip table{width:100%;border-collapse:collapse}
+.slip th{text-align:left;padding:8px 18px;font-size:.9rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink)}
+.slip td{padding:9px 18px;border-bottom:1px dashed rgba(27,42,107,.4);font-family:Caveat,"Segoe Script","Bradley Hand",cursive;font-weight:600;font-size:1.6rem;line-height:1.15;color:var(--blue);vertical-align:top}
+.slip td:first-child{width:92px;font-size:1.9rem;white-space:nowrap}
+.w{display:inline-block;clip-path:inset(-6px 100% -6px 0);animation:write .8s steps(20) forwards;animation-delay:calc(var(--i)*.6s + .5s)}
+@keyframes write{to{clip-path:inset(-6px -6px -6px 0)}}
+.slip-foot{min-height:120px;padding:16px 18px;font-family:Caveat,"Segoe Script",cursive;font-weight:600;font-size:1.55rem;color:var(--blue)}
+.slip-foot span{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.9rem;color:var(--muted);display:block;line-height:1.2}
+.stamp{position:absolute;right:14px;bottom:14px;width:128px;height:128px;display:grid;place-items:center;text-align:center;border:4px double var(--red);border-radius:50%;color:var(--red);font-weight:800;font-size:1.1rem;line-height:1.1;letter-spacing:.04em;text-transform:uppercase;opacity:0;transform:rotate(-14deg) scale(2.2);animation:thud .35s cubic-bezier(.2,1.4,.4,1) 3.3s forwards}
+@keyframes thud{to{opacity:.92;transform:rotate(-14deg) scale(1)}}
+
+/* sections */
+section{padding:60px 0}
+h2{font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;margin:0 0 30px;font-weight:800;letter-spacing:-.035em;color:var(--ink)}
+h3{margin:0 0 6px;font-size:1.2rem;color:var(--ink);font-weight:800}
+.card{background:var(--sheet);border:2px solid var(--ink);border-radius:6px;box-shadow:6px 6px 0 var(--ink);padding:28px}
+.job{border-left:14px solid var(--pink)}
+.job h3{font-size:1.5rem}
+.meta{margin:0 0 16px;color:var(--muted)}
+ul{margin:0;padding-left:1.2em}
+li{margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:start}
+.card.b{box-shadow:6px 6px 0 var(--blue)}
+.card.y{box-shadow:6px 6px 0 var(--sun)}
+.card.y:nth-child(n){background:var(--sheet)}
+
+/* skills as stickers */
+.skills h3{margin-top:22px}
+.chip{display:inline-block;margin:6px 8px 4px 0;padding:6px 15px;border:2px solid var(--ink);border-radius:999px;background:var(--sheet);color:var(--ink);font-weight:600;font-size:1rem}
+.chip:nth-child(3n+1){transform:rotate(-1.6deg);background:var(--sun)}
+.chip:nth-child(3n+2){transform:rotate(1.2deg)}
+.chip:nth-child(3n){transform:rotate(-.6deg);background:#FFC2CD}
+
+/* education timeline: a real sequence */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.tl{list-style:none;margin:0;padding:0 0 0 28px;border-left:3px solid var(--ink)}
+.tl li{position:relative;margin:0;padding:0 0 30px 8px}
+.tl li::before{content:"";position:absolute;left:-40px;top:5px;width:20px;height:20px;border-radius:50%;background:var(--pink);border:3px solid var(--ink)}
+.tl li:last-child{padding-bottom:0}
+.tl li:last-child::before{background:var(--blue)}
+.tl .when{display:block;color:var(--muted);font-size:.95rem}
+.tl .pct{font-family:Caveat,"Segoe Script",cursive;font-weight:600;font-size:1.9rem;line-height:1;color:var(--blue)}
+.tl strong{color:var(--ink);font-size:1.15rem}
+.side h3{margin-top:0}
+.side > div{margin-bottom:34px}
+.club{padding:14px 18px;margin-bottom:12px;background:var(--sheet);border:2px solid var(--ink);border-radius:6px}
+.club b{display:block;color:var(--ink)}
+
+/* contact */
+.contact{background:var(--ink);color:var(--sheet);padding:76px 0 64px;margin-top:40px}
+.contact h2{color:var(--paper);max-width:14em;margin-bottom:18px}
+.contact p{max-width:34em;margin:0 0 28px;font-size:1.15rem}
+.contact .btn{border-color:var(--paper);box-shadow:4px 4px 0 var(--pink)}
+.contact .btn:hover{box-shadow:6px 6px 0 var(--pink)}
+.contact :focus-visible{outline-color:var(--paper)}
+#status{display:inline-block;margin-left:14px;font-weight:600;color:var(--paper)}
+footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
+
+@media (max-width:820px){
+  .hero,.grid2,.cols{grid-template-columns:1fr}
+  .hero{gap:44px;padding-bottom:56px}
+  .slip{transform:rotate(1deg)}
+  .grid2{gap:28px}
+  .cols{gap:44px}
+  .card{padding:22px}
+  .job{border-left-width:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .w{animation:none;clip-path:none}
+  .stamp{animation:none;opacity:.92;transform:rotate(-14deg)}
+  .btn{transition:none}
+}
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>Aditya Yadav</h1>
-    <p class="subtitle">BBA Student | Digital Marketing | Content & Business Support</p>
+<div class="wrap">
+  <nav class="top" aria-label="Page sections">
+    <span class="me">Aditya Yadav</span>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <p>
-      I am a BBA student at Prestige Institute of Management and Research, Gwalior, with practical experience
-      in managing a business's online presence and supporting digital communication. I focus on work that is clean,
-      practical, and useful.
-    </p>
-
-    <h2>About Me</h2>
-    <p>
-      I like using technology in simple, effective ways. My work experience includes handling online profiles,
-      responding to customer feedback professionally, and creating content for social media platforms.
-    </p>
-
-    <h2>Experience Highlights</h2>
-    <ul>
-      <li>Managed a Google Business profile by updating information and monitoring customer feedback.</li>
-      <li>Responded to negative reviews professionally and handled customer communication.</li>
-      <li>Created and managed an Instagram account for a resort.</li>
-      <li>Applied basic digital marketing practices to improve visibility and engagement.</li>
-    </ul>
-
-    <h2>Skills</h2>
+  <header class="hero">
     <div>
-      <span class="tag">Digital Marketing</span>
-      <span class="tag">Advanced Excel</span>
-      <span class="tag">MS Word</span>
-      <span class="tag">PowerPoint</span>
-      <span class="tag">Canva</span>
-      <span class="tag">AI Tools</span>
-      <span class="tag">Communication</span>
+      <h1>Aditya<br>Yadav</h1>
+      <p class="lead">BBA student with a month of real FMCG field work behind me: dozens of shops a day, orders taken at the counter, reports filed every week. I also build small businesses’ online presence.</p>
+      <div class="btns">
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn alt" href="#experience">See my field work</a>
+      </div>
     </div>
 
-    <h2>Certifications</h2>
-    <ul>
-      <li>Digital Marketing Certification</li>
-      <li>AI in HR Certification</li>
-    </ul>
+    <aside class="slip" aria-label="Summary of my work, written like an order slip">
+      <div class="slip-top"><span>Order slip</span><span>No. 150626</span></div>
+      <div class="slip-meta"><span>Party: <b>Retail outlets, Indore</b></span><span>15 Jun – 15 Jul 2026</span></div>
+      <table>
+        <thead><tr><th scope="col">Qty</th><th scope="col">Item</th></tr></thead>
+        <tbody>
+          <tr><td><span class="w" style="--i:0">40–60</span></td><td><span class="w" style="--i:1">outlets visited every day</span></td></tr>
+          <tr><td><span class="w" style="--i:2">30</span></td><td><span class="w" style="--i:3">days in the field</span></td></tr>
+          <tr><td><span class="w" style="--i:4">200+</span></td><td><span class="w" style="--i:5">Instagram followers for a resort</span></td></tr>
+          <tr><td><span class="w" style="--i:6">1</span></td><td><span class="w" style="--i:7">Google Business Profile, managed</span></td></tr>
+        </tbody>
+      </table>
+      <div class="slip-foot"><span>Received by</span>Aditya Yadav</div>
+      <div class="stamp" aria-hidden="true">Field<br>tested</div>
+    </aside>
+  </header>
 
-    <h2>Languages</h2>
-    <p>Hindi, English</p>
+  <main>
+    <section id="experience">
+      <h2>Experience</h2>
+      <article class="card job">
+        <h3>Sales &amp; Marketing Intern, Prataap Snacks Pvt. Ltd. (Yellow Diamond)</h3>
+        <p class="meta">Indore · 15 Jun – 15 Jul 2026 · 30 days</p>
+        <ul>
+          <li>Visited 40–60 retail outlets a day across the assigned territory and took stock orders directly from shopkeepers.</li>
+          <li>Gathered retailer feedback on availability, pricing and supply problems, and flagged issues for follow-up.</li>
+          <li>Observed sales representatives in the field and reported on their performance to support territory accountability.</li>
+          <li>Compiled weekly field reports for area sales management covering market conditions and distributor-level issues.</li>
+          <li>Built working knowledge of FMCG distribution channels and last-mile retail selling.</li>
+        </ul>
+      </article>
+    </section>
 
-    <h2>Contact</h2>
-    <p>
-      Email: <a href="mailto:977.adityayadav@gmail.com">977.adityayadav@gmail.com</a>
-    </p>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid2">
+        <article class="card b">
+          <h3>Digital presence for a family resort</h3>
+          <p class="meta">Personal initiative</p>
+          <ul>
+            <li>Built and managed the resort’s Google Business Profile with branding, photos and location details, so it is easier to find on Google Maps.</li>
+            <li>Monitored customer reviews and wrote professional replies to protect its online reputation.</li>
+            <li>Created its Instagram Business page and grew it past 200 followers through consistent branding and content.</li>
+          </ul>
+        </article>
+        <article class="card y">
+          <h3>This portfolio website</h3>
+          <p class="meta">Built and deployed by me</p>
+          <ul>
+            <li>Written in HTML and hosted on GitHub Pages.</li>
+            <li>Designed around clean layout, simple navigation and clear content.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-    <p class="small">
-      Based in Gwalior, Madhya Pradesh.
-    </p>
+    <section id="skills" class="skills">
+      <h2>Skills</h2>
+      <h3>In the field</h3>
+      <div><span class="chip">Field sales &amp; reporting</span><span class="chip">Market research</span><span class="chip">Customer engagement</span><span class="chip">Team collaboration</span></div>
+      <h3>Online</h3>
+      <div><span class="chip">Digital marketing</span><span class="chip">Social media management</span><span class="chip">Content creation</span><span class="chip">Google Ads</span></div>
+      <h3>Tools</h3>
+      <div><span class="chip">Canva</span><span class="chip">MS Word</span><span class="chip">PowerPoint</span><span class="chip">Excel (basic analytics)</span><span class="chip">SQL (basic)</span><span class="chip">AI tools (ChatGPT, basic automation)</span></div>
+    </section>
+
+    <section id="education">
+      <h2>Education and beyond</h2>
+      <div class="cols">
+        <ol class="tl" aria-label="Education timeline">
+          <li><strong>Class 10</strong><span class="when">Blossom Convent H.S. School</span><span class="pct">73%</span></li>
+          <li><strong>Class 12</strong><span class="when">Blossom Convent H.S. School</span><span class="pct">59%</span></li>
+          <li><strong>Bachelor of Business Administration</strong><span class="when">Prestige Institute of Management and Research, Gwalior</span><span class="when">2024 – July 2027 · currently in 5th semester</span></li>
+        </ol>
+        <div class="side">
+          <div>
+            <h3>College clubs</h3>
+            <div class="club"><b>Report Coordinator</b>Rotaract Club</div>
+            <div class="club"><b>Volunteer</b>Sahitya Prabha Club</div>
+          </div>
+          <div>
+            <h3>Certifications</h3>
+            <ul>
+              <li>Digital Marketing Certification, 30 hours, Prestige Institute, May 2025</li>
+              <li>HR Certification Program, 30 hours, Prestige Institute</li>
+              <li>Fundamentals of Digital Marketing, Google Digital Garage</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <p style="margin:0">Hindi (native), English (fluent)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Need someone who has worked the market?</h2>
+    <p>I’m looking for sales, marketing and digital roles where I can keep learning on the ground. Write to me and I’ll reply.</p>
+    <a class="btn" href="mailto:977.adityayadav@gmail.com">Email Aditya</a>
+    <button class="btn" id="copy" type="button" style="margin-left:10px">Copy email address</button>
+    <span id="status" role="status"></span>
+    <footer>© 2026 Aditya Yadav · Gwalior, Madhya Pradesh</footer>
   </div>
+</section>
+
+<script>
+(function(){
+  var email='977.adityayadav@gmail.com',b=document.getElementById('copy'),s=document.getElementById('status');
+  b.addEventListener('click',function(){
+    var done=function(m){s.textContent=m;setTimeout(function(){s.textContent=''},2500)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(function(){done('Email address copied')},function(){done(email)});
+    }else{done(email)}
+  });
+})();
+</script>
 </body>
 </html>
