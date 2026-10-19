@@ -70,21 +70,20 @@ li{margin-bottom:8px}
 .chip:nth-child(3n+2){transform:rotate(1.2deg)}
 .chip:nth-child(3n){transform:rotate(-.6deg);background:#FFC2CD}
 
-/* education timeline: a real sequence */
+/* what I do + education */
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.tl{list-style:none;margin:0;padding:0 0 0 28px;border-left:3px solid var(--ink)}
-.tl li{position:relative;margin:0;padding:0 0 30px 8px}
-.tl li::before{content:"";position:absolute;left:-40px;top:5px;width:20px;height:20px;border-radius:50%;background:var(--pink);border:3px solid var(--ink)}
-.tl li:last-child{padding-bottom:0}
-.tl li:last-child::before{background:var(--blue)}
-.tl .when{display:block;color:var(--muted);font-size:.95rem}
-.tl .pct{font-family:Caveat,"Segoe Script",cursive;font-weight:600;font-size:1.9rem;line-height:1;color:var(--blue)}
-.tl strong{color:var(--ink);font-size:1.15rem}
 .side h3{margin-top:0}
 .side > div{margin-bottom:34px}
 .club{padding:14px 18px;margin-bottom:12px;background:var(--sheet);border:2px solid var(--ink);border-radius:6px}
 .club b{display:block;color:var(--ink)}
 
+.can{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.can .card h3{font-size:1.4rem;margin-bottom:8px}
+.can .card p{margin:0 0 14px}
+.can .card:nth-child(1){box-shadow:6px 6px 0 var(--pink)}
+.can .card:nth-child(2){box-shadow:6px 6px 0 var(--blue)}
+.can .card:nth-child(3){box-shadow:6px 6px 0 var(--sun)}
+.proof{display:block;font-family:Caveat,"Segoe Script",cursive;font-weight:600;font-size:1.5rem;line-height:1.1;color:var(--blue)}
 /* contact */
 .contact{background:var(--ink);color:var(--sheet);padding:76px 0 64px;margin-top:40px}
 .contact h2{color:var(--paper);max-width:14em;margin-bottom:18px}
@@ -96,7 +95,7 @@ li{margin-bottom:8px}
 footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
 
 @media (max-width:820px){
-  .hero,.grid2,.cols{grid-template-columns:1fr}
+  .hero,.grid2,.cols,.can{grid-template-columns:1fr}
   .hero{gap:44px;padding-bottom:56px}
   .slip{transform:rotate(1deg)}
   .grid2{gap:28px}
@@ -116,6 +115,7 @@ footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
 <div class="wrap">
   <nav class="top" aria-label="Page sections">
     <span class="me">Aditya Yadav</span>
+    <a href="#can-do">What I do</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
@@ -126,7 +126,7 @@ footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
   <header class="hero">
     <div>
       <h1>Aditya<br>Yadav</h1>
-      <p class="lead">BBA student with a month of real FMCG field work behind me: dozens of shops a day, orders taken at the counter, reports filed every week. I also build small businesses’ online presence.</p>
+      <p class="lead">I take orders, read the market and get businesses found online. A month working Indore’s retail routes taught me how FMCG really sells, and I’m ready to do it for your brand.</p>
       <div class="btns">
         <a class="btn" href="#contact">Get in touch</a>
         <a class="btn alt" href="#experience">See my field work</a>
@@ -151,17 +151,27 @@ footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
   </header>
 
   <main>
+    <section id="can-do">
+      <h2>What I can do for you</h2>
+      <div class="can">
+        <article class="card"><h3>I bring in orders.</h3><p>I walk into a shop, talk to the owner and leave with a stock order. That was my daily job in Indore.</p><span class="proof">40–60 outlets a day, 30 days</span></article>
+        <article class="card"><h3>I turn the market into insight.</h3><p>I listen to what retailers say about availability, pricing and supply, flag the problems and report them to the area sales team.</p><span class="proof">weekly field reports to sales management</span></article>
+        <article class="card"><h3>I get small businesses found online.</h3><p>I set up Google Business Profiles, run Instagram pages and answer reviews, so a business looks good when someone searches for it.</p><span class="proof">Instagram page created and grown to 200+</span></article>
+        <article class="card"><h3>I pick up tools fast.</h3><p>Canva, Excel, SQL basics, Google Ads and AI tools are part of how I work. I built and launched my own website too.</p><span class="proof">portfolio live on GitHub Pages</span></article>
+      </div>
+    </section>
+
     <section id="experience">
       <h2>Experience</h2>
       <article class="card job">
         <h3>Sales &amp; Marketing Intern, Prataap Snacks Pvt. Ltd. (Yellow Diamond)</h3>
         <p class="meta">Indore · 15 Jun – 15 Jul 2026 · 30 days</p>
         <ul>
-          <li>Visited 40–60 retail outlets a day across the assigned territory and took stock orders directly from shopkeepers.</li>
-          <li>Gathered retailer feedback on availability, pricing and supply problems, and flagged issues for follow-up.</li>
-          <li>Observed sales representatives in the field and reported on their performance to support territory accountability.</li>
-          <li>Compiled weekly field reports for area sales management covering market conditions and distributor-level issues.</li>
-          <li>Built working knowledge of FMCG distribution channels and last-mile retail selling.</li>
+          <li>Took stock orders face to face from shopkeepers at 40–60 outlets a day across my territory.</li>
+          <li>Turned retailer conversations into intelligence on availability, pricing and supply, and flagged issues for follow-up.</li>
+          <li>Tracked sales representatives’ field performance and reported on it, backing territory accountability.</li>
+          <li>Wrote weekly field reports for area sales management on market conditions and distributor-level issues.</li>
+          <li>Learned how FMCG distribution works, from distributor to last-mile retailer, first-hand.</li>
         </ul>
       </article>
     </section>
@@ -202,11 +212,11 @@ footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
     <section id="education">
       <h2>Education and beyond</h2>
       <div class="cols">
-        <ol class="tl" aria-label="Education timeline">
-          <li><strong>Class 10</strong><span class="when">Blossom Convent H.S. School</span><span class="pct">73%</span></li>
-          <li><strong>Class 12</strong><span class="when">Blossom Convent H.S. School</span><span class="pct">59%</span></li>
-          <li><strong>Bachelor of Business Administration</strong><span class="when">Prestige Institute of Management and Research, Gwalior</span><span class="when">2024 – July 2027 · currently in 5th semester</span></li>
-        </ol>
+        <article class="card b">
+          <h3>Bachelor of Business Administration</h3>
+          <p class="meta">Prestige Institute of Management and Research, Gwalior<br>2024 – July 2027 · currently in 5th semester</p>
+          <p style="margin:0">Learning business in class and putting it to work in the field and online.</p>
+        </article>
         <div class="side">
           <div>
             <h3>College clubs</h3>
@@ -234,7 +244,7 @@ footer{margin-top:56px;color:#c9d0f5;font-size:.95rem}
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Need someone who has worked the market?</h2>
-    <p>I’m looking for sales, marketing and digital roles where I can keep learning on the ground. Write to me and I’ll reply.</p>
+    <p>I bring field experience, digital skills and the habit of showing up every day. If you have a sales, marketing or digital role, write to me and I’ll reply.</p>
     <a class="btn" href="mailto:977.adityayadav@gmail.com">Email Aditya</a>
     <button class="btn" id="copy" type="button" style="margin-left:10px">Copy email address</button>
     <span id="status" role="status"></span>
