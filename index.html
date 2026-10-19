@@ -15,12 +15,12 @@
 :root{--ink:#1d1d1f;--gray:#f5f5f7;--mut:#6e6e73;--mutd:#a1a1a6;--blue:#0071e3;--lnk:#2997ff;--teal:#14756B;--mint:#6EE7C8;--gold:#F5B83D;--deep:#0C3B3A}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:48px}
-body{margin:0;overflow-x:hidden;font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",Roboto,sans-serif;font-size:1.0625rem;line-height:1.5;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:hidden;font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",Roboto,sans-serif;font-size:1.0625rem;line-height:1.5;color:var(--ink);background:#000;-webkit-font-smoothing:antialiased}
 a{color:var(--blue);text-decoration:none}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 .in-w{max-width:1080px;margin:0 auto;padding:0 24px}
 section{padding:120px 0}
-.dark{background:#000;color:#f5f5f7}
+.dark{background:transparent;color:#f5f5f7}
 .light{background:var(--gray)}
 
 /* nav */
@@ -127,9 +127,32 @@ footer{margin-top:110px;padding-top:20px;border-top:1px solid #424245;color:var(
   .js [data-rv]{opacity:1;translate:none;scale:none;transition:none}
   .words .w{transition:none}
 }
+
+/* ---- v2: live background, cursor, tilt ---- */
+html.lenis,html.lenis body{height:auto}
+html.lenis{scroll-behavior:auto}
+section:not(.dark):not(.light){background:#fff}
+#bg,#pt{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#bg{background:radial-gradient(70% 60% at 30% 20%,#0f5a52,#061a1a 70%)}
+#bar{position:fixed;left:0;top:0;height:2px;width:100%;z-index:90;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--mint),var(--gold))}
+.cd,.cr{position:fixed;left:0;top:0;z-index:100;pointer-events:none;opacity:0;border-radius:50%;mix-blend-mode:difference;background:#fff}
+.cd{width:6px;height:6px;margin:-3px}
+.cr{width:34px;height:34px;margin:-17px;background:transparent;border:1px solid #fff;transition:width .3s,height .3s,margin .3s,background .3s}
+.cr.big{width:76px;height:76px;margin:-38px;background:#fff}
+.cur .cd,.cur .cr{opacity:1}
+@media (pointer:fine){.cur,.cur *{cursor:none!important}}
+@media (pointer:coarse){.cd,.cr{display:none}}
+h1{background-size:170% 100%;background-position:var(--gx,50%) 0;background-repeat:no-repeat}
+.lnk,.pill{display:inline-block;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.tile,.pcard{position:relative;overflow:hidden}
+.tile::after,.pcard::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(110,231,200,.28),transparent 62%)}
+.tile:hover::after,.pcard:hover::after{opacity:1}
+.js .tile[data-rv],.js .pcard[data-rv]{transition:opacity .8s ease,translate .9s cubic-bezier(.2,.8,.2,1),scale .9s cubic-bezier(.2,.8,.2,1),transform .25s ease-out;transition-delay:var(--d,0s),var(--d,0s),var(--d,0s),0s}
+@media (prefers-reduced-motion:reduce){#bar,.cd,.cr{display:none}}
 </style>
 </head>
 <body id="top">
+<canvas id="bg" aria-hidden="true"></canvas><canvas id="pt" aria-hidden="true"></canvas><i id="bar"></i><i class="cd" id="cd"></i><i class="cr" id="cr"></i>
 <nav class="nav" aria-label="Page sections"><div class="in-w">
   <a class="brand" href="#top">Aditya Yadav</a>
   <a href="#bring">Skills</a><a href="#work">Experience</a><a href="#projects">Projects</a><a href="#about">Education</a>
@@ -277,6 +300,104 @@ footer{margin-top:110px;padding-top:20px;border-top:1px solid #424245;color:var(
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(email).then(function(){done('Email address copied')},function(){done(email)})}
     else{done(email)}
   });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script>
+(function(){
+var D=document,H=D.documentElement,$=function(s){return [].slice.call(D.querySelectorAll(s))};
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
+var W=innerWidth,V=innerHeight,mx=W/2,my=V/2,lx=.5,ly=.5,rx=mx,ry=my;
+
+/* 1. smooth scroll (Lenis) */
+var lenis=null;
+if(window.Lenis&&!rm){lenis=new Lenis({lerp:.085,wheelMultiplier:.9})}
+D.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');if(!a||!lenis)return;
+  var id=a.getAttribute('href'),el=id.length>1?D.querySelector(id):null;
+  if(id!=='#top'&&!el)return;
+  e.preventDefault();lenis.scrollTo(id==='#top'?0:el,{offset:-48,duration:1.4});
+});
+
+/* 2. shader gradient background (WebGL) */
+var bg=D.getElementById('bg'),gl=bg.getContext('webgl',{antialias:false,alpha:false}),U={};
+if(gl){
+  var fs='precision highp float;uniform vec2 r,m;uniform float t,s;'+
+  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(uv-.5)*vec2(r.x/r.y,1.)*2.4+(m-.5)*.35;float k=t*.12;'+
+  'for(int i=1;i<5;i++){float f=float(i);p+=.55/f*vec2(sin(p.y*f*1.7+k*f+s),cos(p.x*f*1.3-k*f+s*1.3));}'+
+  'float a=.5+.5*sin(p.x+p.y+k),b=.5+.5*sin(p.x*1.3-p.y+k*1.4);'+
+  'vec3 c=mix(vec3(.02,.08,.08),vec3(.07,.42,.38),a);c=mix(c,vec3(.43,.91,.78),b*b*.32);c+=vec3(.96,.72,.24)*pow(b,7.)*.2;'+
+  'c*=.62*(1.15-.6*length(uv-.5));gl_FragColor=vec4(c,1.);}';
+  var mk=function(t,src){var o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);return o};
+  var pr=gl.createProgram();
+  gl.attachShader(pr,mk(gl.VERTEX_SHADER,'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}'));
+  gl.attachShader(pr,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ['r','m','t','s'].forEach(function(n){U[n]=gl.getUniformLocation(pr,n)});
+}
+
+/* 3. particles (2D canvas) */
+var pt=D.getElementById('pt'),cx=pt.getContext('2d'),P=[];
+function size(){
+  var d=Math.min(devicePixelRatio||1,2),q=.6;W=innerWidth;V=innerHeight;
+  pt.width=W*d;pt.height=V*d;cx.setTransform(d,0,0,d,0,0);
+  bg.width=W*q;bg.height=V*q;if(gl)gl.viewport(0,0,bg.width,bg.height);
+  var n=W<700?34:84;
+  while(P.length<n){var bx=(Math.random()-.5)*.3,by=(Math.random()-.5)*.3;P.push({x:Math.random()*W,y:Math.random()*V,bx:bx,by:by,vx:bx,vy:by,r:Math.random()*1.3+.6})}
+  P.length=n;
+}
+var bar=D.getElementById('bar'),cd=D.getElementById('cd'),cr=D.getElementById('cr');
+function draw(t){
+  lx+=(mx/W-lx)*.05;ly+=((1-my/V)-ly)*.05;
+  if(gl){gl.uniform2f(U.r,bg.width,bg.height);gl.uniform2f(U.m,lx,ly);gl.uniform1f(U.t,t*.001);gl.uniform1f(U.s,scrollY*.0009);gl.drawArrays(gl.TRIANGLES,0,3)}
+  cx.clearRect(0,0,W,V);cx.fillStyle='rgba(255,255,255,.6)';
+  var pos=[];
+  for(var i=0;i<P.length;i++){
+    var a=P[i];
+    a.x+=a.vx;a.y+=a.vy;a.vx+=(a.bx-a.vx)*.02;a.vy+=(a.by-a.vy)*.02;
+    if(a.x<0)a.x+=W;if(a.x>W)a.x-=W;if(a.y<0)a.y+=V;if(a.y>V)a.y-=V;
+    var y=((a.y-scrollY*.1*a.r)%V+V)%V,dx=a.x-mx,dy=y-my,d=Math.sqrt(dx*dx+dy*dy)||1;
+    if(d<130&&!rm){var f=(1-d/130)*.35;a.vx+=dx/d*f;a.vy+=dy/d*f}
+    pos.push([a.x,y]);
+    cx.beginPath();cx.arc(a.x,y,a.r,0,6.283);cx.fill();
+    if(d<170&&fine){cx.strokeStyle='rgba(110,231,200,'+(1-d/170)*.45+')';cx.beginPath();cx.moveTo(a.x,y);cx.lineTo(mx,my);cx.stroke()}
+    for(var j=0;j<i;j++){
+      var ex=a.x-pos[j][0],ey=y-pos[j][1],e=ex*ex+ey*ey;
+      if(e<12100){cx.strokeStyle='rgba(159,232,212,'+(1-Math.sqrt(e)/110)*.2+')';cx.beginPath();cx.moveTo(a.x,y);cx.lineTo(pos[j][0],pos[j][1]);cx.stroke()}
+    }
+  }
+  bar.style.transform='scaleX('+Math.min(1,scrollY/Math.max(1,H.scrollHeight-V))+')';
+  rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
+  cr.style.transform='translate('+rx+'px,'+ry+'px)';
+}
+function loop(t){if(lenis)lenis.raf(t);draw(t);requestAnimationFrame(loop)}
+size();addEventListener('resize',function(){size();if(rm)draw(0)});
+if(rm)draw(0);else requestAnimationFrame(loop);
+
+/* 4. cursor, magnetic buttons, tilt + spotlight */
+if(fine&&!rm){
+  var mags=$('.btn,.pill,.lnk'),h1=D.querySelector('h1'),tc=null;
+  addEventListener('pointermove',function(e){
+    mx=e.clientX;my=e.clientY;H.classList.add('cur');
+    cd.style.transform='translate('+mx+'px,'+my+'px)';
+    cr.classList.toggle('big',!!e.target.closest('a,button,.tile,.pcard'));
+    h1.style.setProperty('--gx',(mx/W*100)+'%');
+    mags.forEach(function(el){
+      var r=el.getBoundingClientRect(),dx=mx-(r.left+r.width/2),dy=my-(r.top+r.height/2),near=Math.hypot(dx,dy)<r.width/2+60;
+      el.style.transform=near?'translate('+dx*.25+'px,'+dy*.25+'px)'+(el.classList.contains('btn')?' scale(1.04)':''):'';
+    });
+    var t=e.target.closest('.tile,.pcard');
+    if(tc&&tc!==t)tc.style.transform='';
+    tc=t;if(!t)return;
+    var b=t.getBoundingClientRect(),x=(mx-b.left)/b.width,y=(my-b.top)/b.height;
+    t.style.setProperty('--mx',x*100+'%');t.style.setProperty('--my',y*100+'%');
+    t.style.transform='perspective(900px) rotateX('+(.5-y)*5+'deg) rotateY('+(x-.5)*6+'deg)';
+  },{passive:true});
+  H.addEventListener('mouseleave',function(){if(tc)tc.style.transform='';H.classList.remove('cur')});
+}
 })();
 </script>
 </body>
